@@ -1,6 +1,7 @@
-package com.example.demo.dao;
+package com.example.demo.objectImpl;
 
-import com.example.demo.user.User;
+import com.example.demo.dao.RegistorDao;
+import com.example.demo.object.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

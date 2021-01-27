@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.lang.Result;
 import com.example.demo.dao.LoginDao;
-import com.example.demo.dao.RegistorDao;
-import com.example.demo.user.User;
+import com.example.demo.object.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,14 +23,19 @@ public class LoginController {
     @Autowired
     private LoginDao loginDao;
     private Map<String, Object> map;
+    private Result reverse;
     @PostMapping("/login")
     @ResponseBody
-    public User login(@RequestBody User user) { //获取接收到的对象
+    public Result login(@RequestBody User user) { //获取接收到的对象
         String sql = "select * from t_user where username=?";
         User userResult = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class), user.getUsername());
         System.out.println(userResult.getPassword().equals(user.getPassword()));
-
-        return userResult;
+        if (userResult.getPassword().equals(user.getPassword())) {
+            reverse = Result.success("200","登录成功", userResult);
+        } else {
+            reverse = Result.success("200","登录失败", userResult);
+        }
+        return reverse;
     }
 }
 

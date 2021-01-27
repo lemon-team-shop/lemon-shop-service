@@ -4,3 +4,13 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/user_db?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:config/mapping/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring-boot:
+  servlet:
+    multipart:
+      file-size-threshold: 100MB
+      max-file-size: 10MB
+      max-request-size: 100MB
