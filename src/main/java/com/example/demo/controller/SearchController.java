@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.lang.Result;
 import com.example.demo.dao.SearchDao;
 import com.example.demo.object.Product;
 import com.example.demo.objectImpl.SearchImpl;
@@ -20,10 +21,11 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
     @PostMapping
-    public List searchList (@RequestBody Object acceptName) {
+    public Result searchList (@RequestBody Object acceptName) {
 
         System.out.println(acceptName);
         List list = searchService.searchProductList();
-        return list;
+        Result result = Result.success("200", "success", list);
+        return result;
     }
 }
